@@ -1,9 +1,12 @@
 
 {
   "root": true,
-  "ecmaFeatures": {
-    "jsx": true
+  "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
   },
+
   "env": {
     "browser": true,
     "node": true,

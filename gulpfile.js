@@ -13,6 +13,7 @@ var config = {
     port: 9005,
     devBaseUrl: 'http://localhost',
     paths: {
+        images: './src/images/*',
         html: './src/*.html',
         js: './src/**/*.js',
         css: [
@@ -45,6 +46,17 @@ gulp.task('html', function() {
         .pipe(connect.reload());
 });
 
+// Migrates images to dist folder
+gulp.task('images', function() {
+    gulp.src(config.paths.images)
+        .pipe(gulp.dest(config.paths.dist + '/images'))
+        .pipe(connect.reload());
+
+    //publish favicon
+    gulp.src('./src/favicon.ico')
+        .pipe(gulp.dest(config.paths.dist));
+});
+
 gulp.task('css', function(){
     gulp.src(config.paths.css)
         .pipe(concat('bundle.css'))
@@ -72,4 +84,4 @@ gulp.task('watch', function() {
     gulp.watch(config.paths.js, ['js', 'lint']);
 })
 
-gulp.task('default', ['html', 'js', 'css', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch']);
